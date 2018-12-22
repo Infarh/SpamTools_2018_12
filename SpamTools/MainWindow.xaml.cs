@@ -24,5 +24,10 @@ namespace SpamTools
         {
             InitializeComponent();
         }
+
+        private void OnExitClick(object Sender, RoutedEventArgs E)
+        {
+            Close();
+        }
     }
 }
