@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="SpamTools.Controls.TabControlManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SpamTools.Controls"
+             mc:Ignorable="d" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             Height="18" Width="500">
+    <UniformGrid Rows="1"> 
+        <Button Click="OnBackButtonClick">
+            <StackPanel Orientation="Horizontal">
+                <fa:ImageAwesome Icon="ArrowLeft" Height="13" Margin="5,0" Foreground="LimeGreen"/>
+                <TextBlock Text="Назад" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button Click="OnForvardButtonClick">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Вперёд"  VerticalAlignment="Center"/>
+                <fa:ImageAwesome Icon="ArrowRight" Height="13" Margin="5,0" Foreground="LimeGreen"/>
+            </StackPanel>
+        </Button>
+    </UniformGrid>
+</UserControl>
