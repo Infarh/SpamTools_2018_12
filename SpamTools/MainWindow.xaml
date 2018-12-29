@@ -8,7 +8,9 @@
         xmlns:local="clr-namespace:SpamTools"
         xmlns:data="clr-namespace:SpamTools.lib.Data;assembly=SpamTools.lib"
         xmlns:db="clr-namespace:SpamTools.lib.Database;assembly=SpamTools.lib"
-        Title="MainWindow" Height="600" Width="800">
+        xmlns:view="clr-namespace:SpamTools.View"
+        Title="{Binding Title}" Height="600" Width="800"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <controls:TabControlManager DockPanel.Dock="Right" Height="18" Width="202"
@@ -29,8 +31,7 @@
             </Menu>
         </DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock Text="Статус приложения"/>
-            <ProgressBar Width="150" Height="10" Value="75"/>
+            <TextBlock Text="{Binding Status}"/>
         </StatusBar>
         <TabControl Name="MainTabControl">
             <TabItem Header="Списки рассылки">
@@ -54,14 +55,14 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <Button>
-                                <Image Source="src/add.png" Height="13"/>
+                            <Button ToolTip="Добавить сервер">
+                                <fa:ImageAwesome Icon="Plus" Height="13" Foreground="DarkGreen"/>
                             </Button>
-                            <Button>
-                                <Image Source="src/edit.png" Height="13"/>
+                            <Button ToolTip="Редактировать сервер">
+                                <fa:ImageAwesome Icon="Edit" Height="13" Foreground="Yellow"/>
                             </Button>
-                            <Button>
-                                <Image Source="src/remove.png" Height="13"/>
+                            <Button ToolTip="Удалить сервер">
+                                <fa:ImageAwesome Icon="Remove" Height="13" Foreground="Red"/>
                             </Button>
                         </ToolBar>
                         <ToolBar Band="1" BandIndex="0">
@@ -81,7 +82,24 @@
                         </ToolBar>
                         <ToolBar>
                             <TextBlock Text="Перейти в планировщик"/>
-                            <Button>Перейти</Button>
+                            <Button>
+                                <fa:ImageAwesome Icon="ClockOutline" Height="13">
+                                    <fa:ImageAwesome.Foreground>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <LinearGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                    <RotateTransform Angle="-29.6" CenterY="0.5" CenterX="0.5"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </LinearGradientBrush.RelativeTransform>
+                                            <GradientStop Color="DarkBlue" Offset="0"/>
+                                            <GradientStop Color="Blue" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </fa:ImageAwesome.Foreground>
+                                </fa:ImageAwesome>
+                            </Button>
                         </ToolBar>
                         <ToolBar Band="1">
                             <TextBlock Text="Список адресатов"/>
@@ -97,18 +115,14 @@
                         </ToolBar>
                     </ToolBarTray>
                     <Grid Grid.Row="1">
-                        <Grid.DataContext>
-                            <db:SpamDatabaseDataContext/>
-                        </Grid.DataContext>
-                        <DataGrid ItemsSource="{Binding EmailRecipient}" AutoGenerateColumns="False"
-                                  IsReadOnly="True" HorizontalGridLinesBrush="{x:Null}"
-                                  AlternationCount="2" 
-                                  AlternatingRowBackground="LightGray">
-                            <DataGrid.Columns>
-                                 <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
-                                 <DataGridTextColumn Header="Адрес" Binding="{Binding EmailAddress}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <view:RecepientsView/>
+                        <GridSplitter Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                                      Width="4" Background="Transparent"/>
+                        <view:RecipientsEditorView Grid.Column="1"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -172,10 +186,12 @@
             </TabItem>
             <TabItem Header="Редактор писем">
                 <Grid>
-                    <RichTextBox/>
+                    <TextBox/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Статистика"></TabItem>
+            <TabItem Header="Статистика">
+              
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
