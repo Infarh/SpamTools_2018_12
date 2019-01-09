@@ -42,7 +42,7 @@
                     </Grid.RowDefinitions>
                     <ToolBarTray Grid.Row="0">
                         <ToolBar>
-                            <TextBlock Text="Отправители:"/>
+                            <!--<TextBlock Text="Отправители:"/>
                             <ComboBox Name="Users" Width="150" Margin="3,0,0,0" SelectedIndex="0" 
                                       ItemsSource="{x:Static data:Senders.List}">
                                 <ComboBox.ItemTemplate>
@@ -63,7 +63,21 @@
                             </Button>
                             <Button ToolTip="Удалить сервер">
                                 <fa:ImageAwesome Icon="Remove" Height="13" Foreground="Red"/>
-                            </Button>
+                            </Button>-->
+                            <controls:ListControlPanel Width="300" x:Name="Users" 
+                                                       PanelText="Отправители"
+                                                       ItemSource="{x:Static data:Senders.List}"
+                                                       SelectedIndex="0">
+                                <controls:ListControlPanel.ListItemTemplate>
+                                    <DataTemplate DataType="data:Sender">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock>:</TextBlock>
+                                            <TextBlock Text="{Binding Address}" Opacity="0.5"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </controls:ListControlPanel.ListItemTemplate>
+                            </controls:ListControlPanel>
                         </ToolBar>
                         <ToolBar Band="1" BandIndex="0">
                             <TextBlock Text="Сервера:" MinWidth="74" TextAlignment="Right"/>

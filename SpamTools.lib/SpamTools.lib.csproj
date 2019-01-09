@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\EmailRecipient.cs" />
     <Compile Include="DataServiceDB.cs" />
     <Compile Include="Database\SpamDatabase.designer.cs">
       <AutoGen>True</AutoGen>

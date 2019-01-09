@@ -6,16 +6,51 @@
              xmlns:local="clr-namespace:SpamTools.View"
              mc:Ignorable="d" 
              DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+             xmlns:vl="clr-namespace:SpamTools.ValidationRules"
              d:DesignHeight="470" d:DesignWidth="230">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="DataErrorTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Foreground="Red" FontWeight="Bold" FontSize="18" Text="!" 
+                           ToolTip="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ErrorElement}"/>
+                <Border BorderBrush="Red" BorderThickness="4">
+                    <AdornedElementPlaceholder Name="ErrorElement"/>
+                </Border>
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
     <StackPanel DataContext="{Binding CurrentRecipient}">
         <GroupBox Header="Id">
-            <TextBox IsReadOnly="True" Text="{Binding Id}"/>
+            <TextBox Text="{Binding Id, NotifyOnValidationError=True}" Validation.Error="OnValidationError"/>
         </GroupBox>
         <GroupBox Header="Имя">
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/> 
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" Validation.Error="OnValidationError"/> 
         </GroupBox>
         <GroupBox Header="Адрес">
-            <TextBox Text="{Binding EmailAddress, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Validation.ErrorTemplate="{StaticResource DataErrorTemplate}">
+                <!--<Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Foreground="Red" FontWeight="Bold" FontSize="18" Text="!" 
+                                       ToolTip="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ErrorElement}"/>
+                            <Border BorderBrush="Red" BorderThickness="4">
+                                <AdornedElementPlaceholder Name="ErrorElement"/>
+                            </Border>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>-->
+                <TextBox.Text>
+                    <Binding Path="EmailAddress" UpdateSourceTrigger="PropertyChanged" 
+                             NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <vl:RegExValidationRule Expression="\w+@\w+\.\w+" ErrorMeessage="Адрес введён неверно"/>
+                            <DataErrorValidationRule/>
+                            <NotifyDataErrorValidationRule/>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </GroupBox>
         <Button Content="Внести изменения"
                 Command="{Binding MainWindowModel.UpdateRecipientCommand, Source={StaticResource Locator}}"

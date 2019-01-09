@@ -31,23 +31,23 @@ namespace SpamTools
                 return;
             }
 
-            var sender = Users.SelectedItem as Sender;
-            if (sender == null)
-            {
-                MessageBox.Show("Отправитель не выбран!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            //var sender = Users.SelectedItem as Sender;
+            //if (sender == null)
+            //{
+            //    MessageBox.Show("Отправитель не выбран!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
 
-            var password = new SecureString();
-            foreach (var password_cnar in PasswordService.Decode(sender.Password))
-                password.AppendChar(password_cnar);
+            //var password = new SecureString();
+            //foreach (var password_cnar in PasswordService.Decode(sender.Password))
+            //    password.AppendChar(password_cnar);
 
 
-            var send_mail_service = new MailSenderService(
-                server.Address, server.Port, server.UseSSL,
-                sender.Address, password);
+            //var send_mail_service = new MailSenderService(
+            //    server.Address, server.Port, server.UseSSL,
+            //    sender.Address, password);
 
-            send_mail_service.Send("Subject", "Email body", "email@server.com");
+            //send_mail_service.Send("Subject", "Email body", "email@server.com");
         }
 
         private void OnTabManagerBack(object Sender, EventArgs E)
