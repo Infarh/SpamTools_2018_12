@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolygonConsole", "PolygonCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpamTools.lib", "SpamTools.lib\SpamTools.lib.csproj", "{C2D37F2E-F214-4719-870B-6C04754BD151}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{31D47750-DE5B-455C-9871-964B0E5BA9DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpamTools.lib.Tests", "SpamTools.lib.Tests\SpamTools.lib.Tests.csproj", "{4D7B66F2-69DC-40BF-81DA-49D88946EBCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +33,17 @@ Global
 		{C2D37F2E-F214-4719-870B-6C04754BD151}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2D37F2E-F214-4719-870B-6C04754BD151}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2D37F2E-F214-4719-870B-6C04754BD151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D7B66F2-69DC-40BF-81DA-49D88946EBCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D7B66F2-69DC-40BF-81DA-49D88946EBCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D7B66F2-69DC-40BF-81DA-49D88946EBCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D7B66F2-69DC-40BF-81DA-49D88946EBCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B0EF364C-BBC1-47FD-AFDD-45C5CC480081} = {0D16F2A1-80D4-47F7-96A2-62B22168F4C4}
+		{4D7B66F2-69DC-40BF-81DA-49D88946EBCB} = {31D47750-DE5B-455C-9871-964B0E5BA9DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3EE1C4EA-D98D-4798-B20E-3E4130D954A6}

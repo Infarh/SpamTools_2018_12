@@ -10,11 +10,13 @@ namespace SpamTools.lib.Service
     {
         public static string Encode(string str, int key = 1)
         {
+            if (str is null) throw new ArgumentNullException(nameof(str));
             return new string(str.Select(c => (char)(c + key)).ToArray());
         }
 
         public static string Decode(string str, int key = 1)
         {
+            if(str is null) throw new ArgumentNullException(nameof(str));
             return new string(str.Select(c => (char)(c - key)).ToArray());
         }
     }
