@@ -5,8 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
+using SpamTools.lib.Database;
+using System.Threading;
 
 namespace SpamTools.lib
 {
@@ -27,12 +27,12 @@ namespace SpamTools.lib
             _Password = Password;
         }
 
-        public void Send(string Subject, string Email, string Address)
+        public void Send(string Subject, string Body, string Address)
         {
             using (var message = new MailMessage(_UserName, Address))
             {
                 message.Subject = Subject;
-                message.Body = Email;
+                message.Body = Body;
 
                 using (var client = new SmtpClient(_ServerAddress, _Port))
                 {
@@ -41,14 +41,42 @@ namespace SpamTools.lib
 
                     try
                     {
-                          client.Send(message);
+                        client.Send(message);
                     }
                     catch (Exception e)
                     {
-                        Trace.TraceError(e.Message);    
-                        Trace.TraceError(e.ToString());    
+                        Trace.TraceError(e.Message);
+                        Trace.TraceError(e.ToString());
                     }
                 }
+            }
+        }
+
+        public void Send(string Subject, string Body, IEnumerable<EmailRecipient> recipients)
+        {
+            foreach (var email_recipient in recipients)
+            {
+                Send(Subject, Body, email_recipient.EmailAddress);
+            }
+        }
+
+        public void SendParallel_Thread(string Subject, string Body, IEnumerable<EmailRecipient> recipients)
+        {
+            foreach (var email_recipient in recipients)
+            {
+                var sending_thread = new Thread(() => Send(Subject, Body, email_recipient.EmailAddress));
+                sending_thread.Priority = ThreadPriority.BelowNormal;
+                sending_thread.IsBackground = true;
+                sending_thread.Start();
+            }
+        }
+
+        public void SendParallel(string Subject, string Body, IEnumerable<EmailRecipient> recipients)
+        {
+            foreach (var address in recipients.Select(r => r.EmailAddress))
+            {
+                //ThreadPool.QueueUserWorkItem(p => Send((string)((object[])p)[0], (string)((object[])p)[1], (string)((object[])p)[2]), new object[] { Subject, Body, address });
+                ThreadPool.QueueUserWorkItem(p => Send(Subject, Body, address));
             }
         }
     }

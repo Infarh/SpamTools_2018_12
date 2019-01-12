@@ -196,6 +196,45 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
+                    <GroupBox Grid.Column="1" Header="Задания планировщика">
+                        <ListBox ItemsSource="{Binding Scheduler.Tasks}">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="data:SchedulerTask">
+                                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3">
+                                        <StackPanel>
+                                            <TextBlock>
+                                                 <TextBlock>Время задания:</TextBlock>
+                                                <TextBlock Text="{Binding Time, StringFormat='dd.MM.yyyy h:mm.ss'}"/>
+                                            </TextBlock>
+                                            <TextBlock>
+                                                <TextBlock>Отправитель:</TextBlock>
+                                                <TextBlock Text="{Binding Sender.Name}"/>
+                                                (<TextBlock Text="{Binding Sender.Address}"/>)
+                                            </TextBlock>
+                                            <TextBlock>
+                                                <TextBlock>Сервер:</TextBlock>
+                                                <TextBlock Text="{Binding Server.Address}"/>:<TextBlock Text="{Binding Server.Port}"/>
+                                                UseSSL:<TextBlock Text="{Binding Server.UseSSL}"/>
+                                            </TextBlock>
+                                            <TextBlock Text="Получатели писем"/>
+                                            <ListBox ItemsSource="{Binding Recipients}" Margin="5,0,2,2">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate DataType="db:EmailRecipient">
+                                                        <TextBlock Text="{Binding Name}"/>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Редактор писем">
@@ -204,7 +243,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Статистика">
-              
+
             </TabItem>
         </TabControl>
     </DockPanel>
