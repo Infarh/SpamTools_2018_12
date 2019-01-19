@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SpamTools.lib.Data
 {
-    public class Mail
+    public class Recipient
     {
         public int Id { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
     }
 }

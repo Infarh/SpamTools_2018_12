@@ -8,10 +8,13 @@ namespace SpamTools.lib.Data
 {
     public class MailServer
     {   
+        public int Id { get; set; }
         public string Address { get; set; }
         public int Port { get; set; } = 25;
 
         public bool UseSSL { get; set; } = true;
+
+        public string Description { get; set; }
 
         public MailServer() { }
 

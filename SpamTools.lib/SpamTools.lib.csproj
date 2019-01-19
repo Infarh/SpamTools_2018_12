@@ -31,10 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,14 +59,58 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpamDatabase.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Data\DataBaseContext.cs" />
+    <Compile Include="Data\EFModelFirst\Email.cs">
+      <DependentUpon>SpamDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EFModelFirst\EmailList.cs">
+      <DependentUpon>SpamDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EFModelFirst\EmailRecipient.cs">
+      <DependentUpon>SpamDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EFModelFirst\EmailSender.cs">
+      <DependentUpon>SpamDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EFModelFirst\SchedulerTsask.cs">
+      <DependentUpon>SpamDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EFModelFirst\Server.cs">
+      <DependentUpon>SpamDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EFModelFirst\SpamDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpamDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EFModelFirst\SpamDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpamDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EFModelFirst\SpamDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpamDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Data\Mail.cs" />
     <Compile Include="Data\MailServer.cs" />
     <Compile Include="Data\MailServers.cs" />
+    <Compile Include="Data\Recipient.cs" />
     <Compile Include="Data\SchedulerTask.cs" />
     <Compile Include="Data\Sender.cs" />
     <Compile Include="Data\Senders.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="MailSenderService.cs" />
+    <Compile Include="Migrations\201901191517128_Initial.cs" />
+    <Compile Include="Migrations\201901191517128_Initial.Designer.cs">
+      <DependentUpon>201901191517128_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901191523249_MailServerDescription.cs" />
+    <Compile Include="Migrations\201901191523249_MailServerDescription.Designer.cs">
+      <DependentUpon>201901191523249_MailServerDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MWWM\LamdaCommand.cs" />
     <Compile Include="MWWM\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +133,14 @@
     <None Include="Database\SpamDatabase.dbml.layout">
       <DependentUpon>SpamDatabase.dbml</DependentUpon>
     </None>
+    <EntityDeploy Include="Data\EFModelFirst\SpamDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SpamDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\EFModelFirst\SpamDB.edmx.diagram">
+      <DependentUpon>SpamDB.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -87,6 +148,28 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\EFModelFirst\SpamDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SpamDB.Context.cs</LastGenOutput>
+      <DependentUpon>SpamDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Data\EFModelFirst\SpamDB.edmx.sql" />
+    <Content Include="Data\EFModelFirst\SpamDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SpamDB.cs</LastGenOutput>
+      <DependentUpon>SpamDB.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201901191517128_Initial.resx">
+      <DependentUpon>201901191517128_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901191523249_MailServerDescription.resx">
+      <DependentUpon>201901191523249_MailServerDescription.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
