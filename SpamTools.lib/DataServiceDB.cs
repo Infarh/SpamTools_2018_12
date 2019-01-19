@@ -4,31 +4,30 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpamTools.lib.Data;
 using SpamTools.lib.Database;
 
 namespace SpamTools.lib
 {
     public class DataServiceDB : IDataService
     {
-        private readonly SpamDatabaseDataContext _DataBaseContext;
+        private readonly DataBaseContext _DataBaseContext;
 
-        public DataServiceDB(SpamDatabaseDataContext Context) => _DataBaseContext = Context;
+        public DataServiceDB(DataBaseContext Context) => _DataBaseContext = Context;
 
-        public IEnumerable<EmailRecipient> GetEmailRecipient()
+        public IEnumerable<Recipient> GetEmailRecipient()
         {
-            return new ObservableCollection<EmailRecipient>(_DataBaseContext.EmailRecipient);
+            return new ObservableCollection<Recipient>(_DataBaseContext.Recipients);
         }
 
-        public bool CreateRecipient(EmailRecipient Recipient)
+        public bool CreateRecipient(Recipient Recipient)
         {
-            _DataBaseContext.EmailRecipient.InsertOnSubmit(Recipient);
-            _DataBaseContext.SubmitChanges();
-            return Recipient.Id != 0;
+            throw new NotImplementedException();
         }
 
-        public bool UpdateRecipient(EmailRecipient Recipient)
+        public bool UpdateRecipient(Recipient Recipient)
         {
-            _DataBaseContext.SubmitChanges();
+            _DataBaseContext.SaveChanges();
             return true;
         }
     }

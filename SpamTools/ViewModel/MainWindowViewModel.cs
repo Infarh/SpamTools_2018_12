@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.CommandWpf;
 using SpamTools.lib;
+using SpamTools.lib.Data;
 using SpamTools.lib.Database;
 using SpamTools.lib.MWWM;
 using RelayCommand = GalaSoft.MvvmLight.Command.RelayCommand;
@@ -36,15 +37,15 @@ namespace SpamTools.ViewModel
             set => Set(ref _Status, value);
         }
 
-        private EmailRecipient _CurrentRecipient;
-        public EmailRecipient CurrentRecipient
+        private Recipient _CurrentRecipient;
+        public Recipient CurrentRecipient
         {
             get => _CurrentRecipient;
             set => Set(ref _CurrentRecipient, value);
         }
 
         //private readonly ObservableCollection<EmailRecipient> _Recipients = new ObservableCollection<EmailRecipient>();
-        public ObservableCollection<EmailRecipient> Recipients { get; } = new ObservableCollection<EmailRecipient>();
+        public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>();
 
         public ICommand UpdateRecipientsCommand { get; }
 
@@ -64,7 +65,7 @@ namespace SpamTools.ViewModel
 
         private void OnCreateNewRecipientCommandExecuted()
         {
-            var recipient = new EmailRecipient{ Name = "Получатель", EmailAddress = "user@server.ru" };
+            var recipient = new Recipient { Name = "Получатель", Address = "user@server.ru" };
             if (_DataService.CreateRecipient(recipient))
             {
                 CurrentRecipient = recipient;
@@ -74,12 +75,12 @@ namespace SpamTools.ViewModel
 
         public ICommand UpdateRecipientCommand { get; }
 
-        private bool UpdateRecipientCommandCanExecute(EmailRecipient Recipient)
+        private bool UpdateRecipientCommandCanExecute(Recipient Recipient)
         {
             return true; // Recipient != null || _CurrentRecipient != null;
         }
 
-        private void OnUpdateRecipientCommandExecuted(EmailRecipient Recipient)
+        private void OnUpdateRecipientCommandExecuted(Recipient Recipient)
         {
             var recipient = Recipient ?? _CurrentRecipient;
             if(recipient is null) return;
@@ -90,7 +91,7 @@ namespace SpamTools.ViewModel
         {
             UpdateRecipientsCommand = new RelayCommand(OnUpdateRecipientsCommandExecuted, CanUpdateRecipientsCommandExecute);
             CreateNewRecipientCommand = new RelayCommand(OnCreateNewRecipientCommandExecuted);
-            UpdateRecipientCommand = new GalaSoft.MvvmLight.Command.RelayCommand<EmailRecipient>(OnUpdateRecipientCommandExecuted, UpdateRecipientCommandCanExecute);
+            UpdateRecipientCommand = new GalaSoft.MvvmLight.Command.RelayCommand<Recipient>(OnUpdateRecipientCommandExecuted, UpdateRecipientCommandCanExecute);
 
            _DataService = DataService;
         }

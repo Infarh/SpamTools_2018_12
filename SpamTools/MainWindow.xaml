@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:controls="clr-namespace:SpamTools.Controls"
-        xmlns:local="clr-namespace:SpamTools"
-        xmlns:data="clr-namespace:SpamTools.lib.Data;assembly=SpamTools.lib"
-        xmlns:db="clr-namespace:SpamTools.lib.Database;assembly=SpamTools.lib"
+        xmlns:l="clr-namespace:SpamTools"
+        xmlns:db="clr-namespace:SpamTools.lib.Data;assembly=SpamTools.lib"
         xmlns:view="clr-namespace:SpamTools.View"
         Title="{Binding Title}" Height="600" Width="800"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
@@ -42,34 +41,11 @@
                     </Grid.RowDefinitions>
                     <ToolBarTray Grid.Row="0">
                         <ToolBar>
-                            <!--<TextBlock Text="Отправители:"/>
-                            <ComboBox Name="Users" Width="150" Margin="3,0,0,0" SelectedIndex="0" 
-                                      ItemsSource="{x:Static data:Senders.List}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate DataType="data:Sender">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Name}"/>
-                                            <TextBlock>:</TextBlock>
-                                            <TextBlock Text="{Binding Address}" Opacity="0.5"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Button ToolTip="Добавить сервер">
-                                <fa:ImageAwesome Icon="Plus" Height="13" Foreground="DarkGreen"/>
-                            </Button>
-                            <Button ToolTip="Редактировать сервер">
-                                <fa:ImageAwesome Icon="Edit" Height="13" Foreground="Yellow"/>
-                            </Button>
-                            <Button ToolTip="Удалить сервер">
-                                <fa:ImageAwesome Icon="Remove" Height="13" Foreground="Red"/>
-                            </Button>-->
-                            <controls:ListControlPanel Width="300" x:Name="Users" 
+                            <controls:ListControlPanel Width="300" 
                                                        PanelText="Отправители"
-                                                       ItemSource="{x:Static data:Senders.List}"
                                                        SelectedIndex="0">
                                 <controls:ListControlPanel.ListItemTemplate>
-                                    <DataTemplate DataType="data:Sender">
+                                    <DataTemplate DataType="db:Sender">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}"/>
                                             <TextBlock>:</TextBlock>
@@ -82,7 +58,6 @@
                         <ToolBar Band="1" BandIndex="0">
                             <TextBlock Text="Сервера:" MinWidth="74" TextAlignment="Right"/>
                             <ComboBox Name="Servers" Width="150" Margin="3,0,0,0" SelectedIndex="0" 
-                                      ItemsSource="{x:Static data:MailServers.Servers}"
                                       DisplayMemberPath="Address"/>
                             <Button ToolTip="Добавить сервер">
                                 <fa:ImageAwesome Icon="Plus" Height="13" Foreground="DarkGreen"/>
@@ -204,7 +179,7 @@
                                 </Style>
                             </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
-                                <DataTemplate DataType="data:SchedulerTask">
+                                <DataTemplate DataType="db:SchedulerTask">
                                     <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3">
                                         <StackPanel>
                                             <TextBlock>
@@ -224,7 +199,7 @@
                                             <TextBlock Text="Получатели писем"/>
                                             <ListBox ItemsSource="{Binding Recipients}" Margin="5,0,2,2">
                                                 <ListBox.ItemTemplate>
-                                                    <DataTemplate DataType="db:EmailRecipient">
+                                                    <DataTemplate DataType="db:Recipient">
                                                         <TextBlock Text="{Binding Name}"/>
                                                     </DataTemplate>
                                                 </ListBox.ItemTemplate>

@@ -40,7 +40,7 @@
                     </ControlTemplate>
                 </Validation.ErrorTemplate>-->
                 <TextBox.Text>
-                    <Binding Path="EmailAddress" UpdateSourceTrigger="PropertyChanged" 
+                    <Binding Path="Address" UpdateSourceTrigger="PropertyChanged" 
                              NotifyOnValidationError="True">
                         <Binding.ValidationRules>
                             <vl:RegExValidationRule Expression="\w+@\w+\.\w+" ErrorMeessage="Адрес введён неверно"/>

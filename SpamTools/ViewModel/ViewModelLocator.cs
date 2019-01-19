@@ -2,6 +2,7 @@ using System;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using SpamTools.lib;
+using SpamTools.lib.Data;
 using SpamTools.lib.Database;
 
 namespace SpamTools.ViewModel
@@ -15,8 +16,8 @@ namespace SpamTools.ViewModel
             if (!SimpleIoc.Default.IsRegistered<Random>())
                 SimpleIoc.Default.Register(() => new Random(DateTime.Now.Millisecond));
 
-            if (!SimpleIoc.Default.IsRegistered<SpamDatabaseDataContext>())
-                SimpleIoc.Default.Register(() => new SpamDatabaseDataContext());
+            if (!SimpleIoc.Default.IsRegistered<DataBaseContext>())
+                SimpleIoc.Default.Register(() => new DataBaseContext());
             SimpleIoc.Default.Register<IDataService, DataServiceDB>();
 
             SimpleIoc.Default.Register<MainWindowViewModel>();

@@ -95,11 +95,9 @@
     </Compile>
     <Compile Include="Data\Mail.cs" />
     <Compile Include="Data\MailServer.cs" />
-    <Compile Include="Data\MailServers.cs" />
     <Compile Include="Data\Recipient.cs" />
     <Compile Include="Data\SchedulerTask.cs" />
     <Compile Include="Data\Sender.cs" />
-    <Compile Include="Data\Senders.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="MailSenderService.cs" />
     <Compile Include="Migrations\201901191517128_Initial.cs" />
