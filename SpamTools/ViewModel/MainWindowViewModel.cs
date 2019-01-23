@@ -10,7 +10,6 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.CommandWpf;
 using SpamTools.lib;
 using SpamTools.lib.Data;
-using SpamTools.lib.Database;
 using SpamTools.lib.MWWM;
 using RelayCommand = GalaSoft.MvvmLight.Command.RelayCommand;
 

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security;
-using SpamTools.lib.Database;
 using System.Threading;
 using System.Threading.Tasks;
+using SpamTools.lib.Data;
 
 namespace SpamTools.lib
 {
@@ -79,29 +79,29 @@ namespace SpamTools.lib
             }
         }
 
-        public void Send(string Subject, string Body, IEnumerable<EmailRecipient> recipients)
+        public void Send(string Subject, string Body, IEnumerable<Recipient> recipients)
         {
             foreach (var email_recipient in recipients)
-                Send(Subject, Body, email_recipient.EmailAddress);
+                Send(Subject, Body, email_recipient.Address);
         }
 
-        public async Task SendAsync(string Subject, string Body, IEnumerable<EmailRecipient> recipients)
+        public async Task SendAsync(string Subject, string Body, IEnumerable<Recipient> recipients)
         {
             foreach (var email_recipient in recipients)
-                await SendAsync(Subject, Body, email_recipient.EmailAddress).ConfigureAwait(false);
+                await SendAsync(Subject, Body, email_recipient.Address).ConfigureAwait(false);
         }
 
-        public async Task SendParallelAsync(string Subject, string Body, IEnumerable<EmailRecipient> recipients)
+        public async Task SendParallelAsync(string Subject, string Body, IEnumerable<Recipient> recipients)
         {
-            await Task.WhenAll(recipients.Select(recipient => SendAsync(Subject, Body, recipient.EmailAddress)))
+            await Task.WhenAll(recipients.Select(recipient => SendAsync(Subject, Body, recipient.Address)))
                 .ConfigureAwait(false);
         }
 
-        public void SendParallel(string Subject, string Body, IEnumerable<EmailRecipient> recipients, int DegreeOfParallelism)
+        public void SendParallel(string Subject, string Body, IEnumerable<Recipient> recipients, int DegreeOfParallelism)
         {
             recipients.AsParallel()
                 .WithDegreeOfParallelism(DegreeOfParallelism)
-                .Select(recipient => recipient.EmailAddress)
+                .Select(recipient => recipient.Address)
                 .ForAll(recipient_address => Send(Subject, Body, recipient_address));
         }
     }

@@ -11,16 +11,7 @@ namespace PolygonConsole
         [STAThread]
         private static void Main(string[] args)
         {
-            var report = new Report();
-
-            report.Text1 = "987";
-            report.Text2 = "Здравствуй Мир!!!";
-
-            report.CreatePackage("doc.docx");
-
-
-
-            //Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }

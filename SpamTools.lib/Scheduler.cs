@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using SpamTools.lib.Data;
-using SpamTools.lib.Database;
 
 namespace SpamTools.lib
 {

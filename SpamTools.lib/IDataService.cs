@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpamTools.lib.Data;
-using SpamTools.lib.Database;
 
 namespace SpamTools.lib
 {
