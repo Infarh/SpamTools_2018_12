@@ -3,7 +3,6 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using SpamTools.lib;
 using SpamTools.lib.Data;
-using SpamTools.lib.Database;
 
 namespace SpamTools.ViewModel
 {

@@ -17,7 +17,6 @@ namespace SpamTools.lib
             {
                 new SchedulerTask
                 {
-                    Mail = new Mail { Body = "Test mail 1", Subject = "Mail 1" },
                     Sender = new Sender { Address = "sender@server.ru", Name = "Sender name", Password = "Sender password" },
                     Recipients = new[]
                     {
@@ -30,7 +29,6 @@ namespace SpamTools.lib
                 },
                 new SchedulerTask
                 {
-                    Mail = new Mail { Body = "Test mail 2", Subject = "Mail 2" },
                     Sender = new Sender { Address = "sender1@server.ru", Name = "Sender name 1", Password = "Sender password" },
                     Recipients = new[]
                     {

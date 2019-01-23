@@ -20,6 +20,10 @@ namespace SpamTools.lib.Data
         public DbSet<Recipient> Recipients { get; set; }
         public DbSet<Sender> Senders { get; set; }
 
+        public DbSet<SchedulerTask> SchedulerTasks { get; set; }
+
+        public DbSet<MailList> MailsLists { get; set; }
+
         public DataBaseContext() : this("name=SpamDatabase") { }
 
         public DataBaseContext(string ConnectionString) 

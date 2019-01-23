@@ -8,10 +8,11 @@ namespace SpamTools.lib.Data
 {
     public class SchedulerTask
     {
+        public int Id { get; set; }
         public DateTime Time { get; set; }
-        public IEnumerable<Recipient> Recipients { get; set; }
-        public MailServer Server { get; set; }
-        public Sender Sender { get; set; }
-        public Mail Mail { get; set; }
+        public virtual ICollection<Recipient> Recipients { get; set; }
+        public virtual MailServer Server { get; set; }
+        public virtual Sender Sender { get; set; }
+        public virtual MailList Mail { get; set; }
     }
 }

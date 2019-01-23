@@ -55,6 +55,7 @@
     <Compile Include="DataServiceDB.cs" />
     <Compile Include="Data\DataBaseContext.cs" />
     <Compile Include="Data\Mail.cs" />
+    <Compile Include="Data\MailList.cs" />
     <Compile Include="Data\MailServer.cs" />
     <Compile Include="Data\Recipient.cs" />
     <Compile Include="Data\SchedulerTask.cs" />
@@ -68,6 +69,10 @@
     <Compile Include="Migrations\201901191523249_MailServerDescription.cs" />
     <Compile Include="Migrations\201901191523249_MailServerDescription.Designer.cs">
       <DependentUpon>201901191523249_MailServerDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901231623392_SchedulerTasksAdded.cs" />
+    <Compile Include="Migrations\201901231623392_SchedulerTasksAdded.Designer.cs">
+      <DependentUpon>201901231623392_SchedulerTasksAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MWWM\LamdaCommand.cs" />
@@ -100,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901191523249_MailServerDescription.resx">
       <DependentUpon>201901191523249_MailServerDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901231623392_SchedulerTasksAdded.resx">
+      <DependentUpon>201901231623392_SchedulerTasksAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
